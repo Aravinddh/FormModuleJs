@@ -10,7 +10,6 @@
     animation: fadeIn 0.3s ease-out;
 }
 
-/* Form layout */
 form {
     display: flex;
     flex-direction: column;
@@ -38,7 +37,6 @@ h2 {
     border-radius: 8px;
 }
 
-/* Input fields */
 input {
     width: 100%;
     padding: 1.2rem;
@@ -61,7 +59,6 @@ input:focus {
     box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.3);
 }
 
-/* Submit button */
 button[type="submit"] {
     padding: 1.2rem 1.8rem;
     background-color: #14b8a6;
@@ -83,7 +80,6 @@ button[type="submit"]:active {
     transform: translateY(0);
 }
 
-/* Result container */
 #result-container {
     background-color: #1e293b;
     border-radius: 8px;
@@ -104,7 +100,6 @@ button[type="submit"]:active {
     margin-bottom: 0.8rem;
 }
 
-/* Validation styling */
 input:invalid:not(:placeholder-shown) {
     border-color: #ef4444;
 }
@@ -113,7 +108,6 @@ input:valid:not(:placeholder-shown) {
     border-color: #10b981;
 }
 
-/* Responsive adjustments */
 @media (max-width: 600px) {
     .form-container {
         margin: 1rem;
