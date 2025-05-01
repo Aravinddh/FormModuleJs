@@ -18,6 +18,8 @@ export function formModule(container) {
         { type: "tel", name: "phone", placeholder: "Enter your Phone No.", label: "Phone Number", regex: /^[0-9]{10}$/ }
     ];
 
+    const inputElements = {};
+
     fields.forEach(({ type, name, placeholder, label }) => {
         const wrapper = document.createElement("div");
         wrapper.style.display = "flex";
@@ -38,15 +40,15 @@ export function formModule(container) {
         input.placeholder = placeholder;
         input.required = true;
         input.style.flex = "1";
+        input.style.borderColor = "#ccc";
         input.oninput = () => {
-            if (input.value) {
-                input.value = input.value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-            }
-        };
-
+            input.value = input.value.replace(/</g, "").replace(/>/g, "");
+          };
         wrapper.appendChild(labelEl);
         wrapper.appendChild(input);
         form.appendChild(wrapper);
+
+        inputElements[name] = input;
     });
 
     const submit = document.createElement("button");
@@ -60,46 +62,55 @@ export function formModule(container) {
     form.onsubmit = (event) => {
         event.preventDefault();
 
-        const phoneInput = form.querySelector('input[name="phone"]');
-        const phoneValid = /^[0-9]{10}$/.test(phoneInput.value);
+        const name = inputElements.name.value.trim();
+        const email = inputElements.email.value.trim();
+        const phone = inputElements.phone.value.trim();
+        const phoneValid = /^[0-9]{10}$/.test(phone);
 
         if (!phoneValid) {
-            phoneInput.style.borderColor = "#ef4444";
+            inputElements.phone.style.borderColor = "#ef4444";
             return;
         } else {
-            phoneInput.style.borderColor = "#10b981";
+            inputElements.phone.style.borderColor = "#10b981";
         }
 
-        const formData = new FormData(form);
-        const name = formData.get("name");
-        const email = formData.get("email");
-        const phone = formData.get("phone");
-
         heading.textContent = "Submitted Details";
-
         form.style.display = "none";
 
         const resultContainer = document.createElement("div");
-        resultContainer.id = "result-container";
         resultContainer.style.backgroundColor = "#2f2f2f";
         resultContainer.style.padding = "2rem";
         resultContainer.style.borderRadius = "10px";
         resultContainer.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)";
         resultContainer.style.color = "#f8fafc";
         resultContainer.style.textAlign = "center";
-        resultContainer.innerHTML = `
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Phone:</strong> ${phone}</p>
-            <button id="backButton" style="padding: 0.8rem 1.5rem; background-color: #14b8a6; color: white; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; transition: background-color 0.2s ease;">Go Back to Form</button>
-        `;
+
+        const nameP = document.createElement("p");
+        nameP.textContent = `Name: ${name}`;
+
+        const emailP = document.createElement("p");
+        emailP.textContent = `Email: ${email}`;
+
+        const phoneP = document.createElement("p");
+        phoneP.textContent = `Phone: ${phone}`;
+
+        const backButton = document.createElement("button");
+        backButton.textContent = "Go Back to Form";
+        backButton.style.padding = "0.8rem 1.5rem";
+        backButton.style.backgroundColor = "#14b8a6";
+        backButton.style.color = "white";
+        backButton.style.border = "none";
+        backButton.style.borderRadius = "8px";
+        backButton.style.fontSize = "1.1rem";
+        backButton.style.cursor = "pointer";
+        backButton.style.marginTop = "1rem";
+        backButton.onclick = () => location.reload();
+
+        resultContainer.appendChild(nameP);
+        resultContainer.appendChild(emailP);
+        resultContainer.appendChild(phoneP);
+        resultContainer.appendChild(backButton);
 
         container.appendChild(resultContainer);
-
-        const backButton = document.getElementById("backButton");
-
-        backButton.onclick = () => {
-            location.reload();
-        };
     };
 }
