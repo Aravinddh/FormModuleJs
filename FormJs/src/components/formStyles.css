@@ -1,0 +1,145 @@
+body {
+    background-color: #242424;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    background: #2f2f2f;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    color: #f8fafc;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Form layout */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+label {
+    font-weight: 600;
+    width: 120px;
+    color: #ffffff;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    color: #0d9488;
+    position: relative;
+    top: -20px;
+    background-color: #1e293b;
+    height: 60px;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+
+/* Input fields */
+input {
+    width: 100%;
+    padding: 1.2rem;
+    border: 1px solid #475569;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    background-color: #1e293b;
+    color: #f1f5f9;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input::placeholder {
+    color: #94a3b8;
+    font-size: 1.1rem;
+}
+
+input:focus {
+    outline: none;
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.3);
+}
+
+/* Submit button */
+button[type="submit"] {
+    padding: 1.2rem 1.8rem;
+    background-color: #14b8a6;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0d9488;
+    transform: translateY(-1px);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* Result container */
+#result-container {
+    background-color: #1e293b;
+    border-radius: 8px;
+    padding: 1.5rem;
+    color: #f8fafc;
+    margin-top: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#result-container h3 {
+    color: #14b8a6;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+#result-container p {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+}
+
+/* Validation styling */
+input:invalid:not(:placeholder-shown) {
+    border-color: #ef4444;
+}
+
+input:valid:not(:placeholder-shown) {
+    border-color: #10b981;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .form-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    h2{
+        font-size: 30px;
+        height: 120px;
+    }
+    label {
+        font-size: 1.2rem;
+    }
+    
+    input,
+    button[type="submit"] {
+        font-size: 1.1rem;
+        padding: 1rem;
+    }
+
+    #result-container {
+        padding: 1rem;
+    }
+}
